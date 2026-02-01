@@ -1,0 +1,166 @@
+/* Stuff Company - Responsive Styles */
+
+/* ============================================
+   Tablet (max-width: 992px)
+   ============================================ */
+@media (max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .flip-card {
+        height: 220px;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+
+    .container {
+        padding: 0 20px;
+    }
+}
+
+/* ============================================
+   Mobile (max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+
+    .site-header {
+        padding: 20px 0;
+    }
+
+    .site-logo {
+        max-width: 200px;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .nav-list a {
+        font-size: 0.85rem;
+        padding: 8px 5px;
+    }
+
+    .main-content {
+        padding: 30px 0;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 350px;
+    }
+
+    .flip-card {
+        height: 200px;
+    }
+
+    .featured-work {
+        padding: 30px 0;
+    }
+
+    .contact-section {
+        padding: 40px 15px;
+    }
+
+    .project-logo {
+        max-width: 280px;
+    }
+
+    .project-description {
+        font-size: 1rem;
+    }
+
+    .book-mockup img {
+        max-width: 100%;
+    }
+
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .external-link a {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+}
+
+/* ============================================
+   Small Mobile (max-width: 480px)
+   ============================================ */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .site-logo {
+        max-width: 150px;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .flip-card {
+        height: 180px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .form-control {
+        padding: 10px 12px;
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .main-nav,
+    .contact-section,
+    .site-footer {
+        display: none;
+    }
+
+    body {
+        font-size: 12pt;
+        color: #000;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    .video-container {
+        display: none;
+    }
+
+    .video-container::after {
+        content: "[Video content available at stuff.company]";
+        display: block;
+    }
+}

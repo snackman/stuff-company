@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect fill="#f4e4bc" width="400" height="300"/>
+  <!-- Tiki hut roof -->
+  <polygon points="200,30 50,120 350,120" fill="#8b4513"/>
+  <polygon points="200,50 80,120 320,120" fill="#a0522d"/>
+  <!-- Straw texture lines -->
+  <line x1="200" y1="50" x2="100" y2="120" stroke="#654321" stroke-width="2"/>
+  <line x1="200" y1="50" x2="150" y2="120" stroke="#654321" stroke-width="2"/>
+  <line x1="200" y1="50" x2="250" y2="120" stroke="#654321" stroke-width="2"/>
+  <line x1="200" y1="50" x2="300" y2="120" stroke="#654321" stroke-width="2"/>
+  <!-- Hut structure -->
+  <rect fill="#deb887" x="80" y="120" width="240" height="150"/>
+  <rect fill="#8b4513" x="160" y="180" width="80" height="90" rx="5"/>
+  <!-- Bar counter -->
+  <rect fill="#654321" x="60" y="200" width="280" height="20" rx="3"/>
+  <text x="200" y="285" font-family="Arial, sans-serif" font-size="14" fill="#666" text-anchor="middle">Tiki Hut Installation</text>
+</svg>
