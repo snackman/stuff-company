@@ -246,7 +246,7 @@ p {
    Contact Form Section
    ============================================ */
 .contact-section {
-    background: #f8f8f8;
+    background: #fff;
     padding: 60px 0;
     margin-top: 40px;
 }
@@ -254,6 +254,9 @@ p {
 .contact-section h2 {
     text-align: center;
     margin-bottom: 30px;
+    font-family: 'Caveat', cursive;
+    text-transform: none;
+    font-size: 2.5rem;
 }
 
 .contact-form {
@@ -267,53 +270,56 @@ p {
 
 .form-group label {
     display: block;
-    font-weight: 700;
-    margin-bottom: 5px;
-    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-bottom: 8px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    text-align: center;
 }
 
 .form-control {
     width: 100%;
-    padding: 12px 15px;
+    padding: 12px 20px;
     font-size: 1rem;
     font-family: 'Lato', sans-serif;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border-color 0.2s ease;
+    border: none;
+    border-radius: 25px;
+    background: #f0f0f0;
+    transition: background-color 0.2s ease;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: #337ab7;
-    box-shadow: 0 0 0 2px rgba(51, 122, 183, 0.2);
+    background: #e8e8e8;
 }
 
 textarea.form-control {
     min-height: 150px;
     resize: vertical;
+    border-radius: 20px;
 }
 
 .btn {
     display: inline-block;
     padding: 12px 30px;
-    font-size: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 1.3rem;
+    font-family: 'Caveat', cursive;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background: #337ab7;
+    background: #000;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background: #286090;
+    background: #333;
 }
 
 /* ============================================
@@ -324,7 +330,8 @@ textarea.form-control {
     margin-bottom: 40px;
 }
 
-.project-header h1 {
+.project-header h1,
+.featured-work-title {
     font-family: 'Caveat', cursive;
     text-transform: none;
     font-size: 2.5rem;
