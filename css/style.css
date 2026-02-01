@@ -270,7 +270,7 @@ p {
 
 .form-group label {
     display: block;
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 8px;
     font-family: 'Caveat', cursive;
     font-size: 1.4rem;
@@ -282,9 +282,9 @@ p {
     padding: 12px 20px;
     font-size: 1rem;
     font-family: 'Lato', sans-serif;
-    border: none;
+    border: 1px dashed #ccc;
     border-radius: 25px;
-    background: #f0f0f0;
+    background: #fafafa;
     transition: background-color 0.2s ease;
 }
 
@@ -304,7 +304,7 @@ textarea.form-control {
     padding: 12px 30px;
     font-size: 1.3rem;
     font-family: 'Caveat', cursive;
-    font-weight: 400;
+    font-weight: 700;
     text-transform: none;
     letter-spacing: 0;
     border: none;
