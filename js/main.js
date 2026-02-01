@@ -8,15 +8,15 @@
 
     // Tagline words to cycle through
     const taglineWords = [
-        'Video',
-        'Websites',
-        'Design',
-        'Data',
-        'Print',
-        'Fabrication',
-        'Lasers',
-        'Wood',
-        'Stuff'
+        'video',
+        'websites',
+        'design',
+        'data',
+        'print',
+        'fabrication',
+        'lasers',
+        'wood',
+        'stuff'
     ];
 
     let currentIndex = 0;
