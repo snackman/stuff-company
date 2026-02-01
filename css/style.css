@@ -352,6 +352,17 @@ textarea.form-control {
     margin-bottom: 30px;
 }
 
+.project-hero {
+    margin-bottom: 30px;
+}
+
+.project-hero img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
 /* YouTube Video Embeds */
 .video-container {
     position: relative;
