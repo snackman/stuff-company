@@ -218,7 +218,7 @@ p {
 }
 
 .flip-card-back {
-    background: #337ab7;
+    background: #000;
     color: #fff;
     transform: rotateY(180deg);
 }
@@ -238,7 +238,7 @@ p {
 
 .flip-card-back a:hover {
     background: #fff;
-    color: #337ab7;
+    color: #000;
     text-decoration: none;
 }
 
