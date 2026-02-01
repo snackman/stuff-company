@@ -224,6 +224,10 @@ p {
     max-height: 60px;
 }
 
+.flip-card-front img.logo-large {
+    max-height: 125px;
+}
+
 /* ============================================
    Contact Form Section
    ============================================ */
