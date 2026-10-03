@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Submit your W-9, W-8BEN or W-8BEN-E to Stuff Company, LLC.">
+    <title>Tax Forms - Stuff Company, LLC</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon/favicon-32x32.gif" sizes="32x32">
+    <link rel="icon" href="../images/favicon/favicon-192x192.gif" sizes="192x192">
+    <link rel="apple-touch-icon" href="../images/favicon/apple-touch-icon.gif">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="tax-form.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="../index.html">
+                    <img src="../images/logo.gif" alt="Stuff Company, LLC">
+                </a>
+            </div>
+            <p class="tagline">we know <span class="tagline-word">stuff</span></p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-content tf">
+                <div class="project-header">
+                    <h1>Tax Forms</h1>
+                </div>
+
+                <noscript><p class="tf-alert tf-alert-error">This page needs JavaScript to submit your form.</p></noscript>
+
+                <!-- Step 1: contact + form picker -->
+                <section id="step-pick">
+                    <p class="tf-lead">
+                        Getting paid by Stuff Company, LLC? We need a tax form on file.
+                        Fill one out and e-sign it here, or upload a form you've already signed.
+                        Your form is encrypted as soon as it reaches us.
+                    </p>
+
+                    <div class="tf-grid-2">
+                        <div class="tf-field">
+                            <label for="contactName">Your name</label>
+                            <input type="text" id="contactName" class="form-control" autocomplete="name" maxlength="120" required>
+                        </div>
+                        <div class="tf-field">
+                            <label for="contactEmail">Your email</label>
+                            <input type="email" id="contactEmail" class="form-control" autocomplete="email" maxlength="200" required>
+                        </div>
+                    </div>
+
+                    <h2 class="tf-h2">Which form applies to you?</h2>
+                    <div class="tf-cards">
+                        <button type="button" class="tf-card" data-pick="w9">
+                            <span class="tf-card-title">US individual or business (W-9)</span>
+                            <span class="tf-card-desc">Use this if you live in the US or your business is registered in the US.</span>
+                        </button>
+                        <button type="button" class="tf-card" data-pick="w8ben">
+                            <span class="tf-card-title">Individual outside the US (W-8BEN)</span>
+                            <span class="tf-card-desc">Use this if you are a non-US individual.</span>
+                        </button>
+                        <button type="button" class="tf-card" data-pick="w8bene">
+                            <span class="tf-card-title">Organization outside the US (W-8BEN-E)</span>
+                            <span class="tf-card-desc">Use this if your organization is registered outside the US.</span>
+                        </button>
+                    </div>
+                    <p class="tf-center tf-small">
+                        Already have a signed form?
+                        <button type="button" class="tf-link" data-pick="upload">Upload a signed PDF instead</button>
+                    </p>
+                </section>
+
+                <!-- ================= W-9 ================= -->
+                <form id="form-w9" class="tf-form" hidden novalidate>
+                    <div class="tf-form-head">
+                        <h2 class="tf-h2">Form W-9</h2>
+                        <button type="button" class="tf-link" data-back>Change form type</button>
+                    </div>
+
+                    <div class="tf-alert tf-alert-warn">
+                        <strong>W-9 is only for US persons.</strong>
+                        Use W-9 if you're a US citizen, US resident, US LLC, or US corporation. If you live or are based
+                        outside the US, use W-8BEN (individual) or W-8BEN-E (entity) instead.
+                        <div class="tf-btn-row">
+                            <button type="button" class="tf-btn-small" data-switch="w8ben">Switch to W-8BEN (individual)</button>
+                            <button type="button" class="tf-btn-small" data-switch="w8bene">Switch to W-8BEN-E (entity)</button>
+                        </div>
+                    </div>
+
+                    <div class="tf-field">
+                        <label for="w9-category">Federal tax classification</label>
+                        <p class="tf-help">Pick this first; the name fields below adapt to what you choose.</p>
+                        <select id="w9-category" class="form-control">
+                            <option value="">Select classification…</option>
+                            <option value="individual">Individual / sole proprietor</option>
+                            <option value="c_corp">C Corporation</option>
+                            <option value="s_corp">S Corporation</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="trust_estate">Trust / estate</option>
+                            <option value="llc">Limited liability company (LLC)</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="tf-field" id="w9-llc-wrap" hidden>
+                        <label for="w9-llc">How is the LLC taxed?</label>
+                        <select id="w9-llc" class="form-control">
+                            <option value="">Select LLC tax treatment…</option>
+                            <option value="c">C corporation</option>
+                            <option value="s">S corporation</option>
+                            <option value="p">Partnership</option>
+                            <option value="disregarded">Disregarded entity (single-member LLC)</option>
+                        </select>
+                        <p class="tf-help">Disregarded = single-member LLC. The IRS treats it as the owner; you'll enter the owner's name on Line 1 and the LLC's name on Line 2.</p>
+                    </div>
+                    <div class="tf-box" id="w9-3b-wrap" hidden>
+                        <label class="tf-check"><input type="checkbox" data-field="hasForeignPartnersOrOwners"> Check if you have any foreign partners, owners, or beneficiaries</label>
+                        <p class="tf-help">Line 3b (March 2024 W-9 revision). Applies if you checked Partnership, Trust/Estate, or LLC taxed as a partnership AND you're giving this form to a partnership, trust, or estate in which you have an ownership interest.</p>
+                    </div>
+
+                    <div id="w9-rest" hidden>
+                        <div class="tf-field">
+                            <label for="w9-name">Line 1 — Name</label>
+                            <input type="text" id="w9-name" class="form-control" data-field="name" maxlength="300" required>
+                            <p class="tf-help" id="w9-name-help"></p>
+                        </div>
+                        <div class="tf-field">
+                            <label for="w9-business">Line 2 — Business / DBA name</label>
+                            <input type="text" id="w9-business" class="form-control" data-field="businessName" maxlength="300">
+                            <p class="tf-help" id="w9-business-help"></p>
+                        </div>
+                        <div class="tf-field">
+                            <label for="w9-address">Address (number, street, apt / suite)</label>
+                            <input type="text" id="w9-address" class="form-control" data-field="address" autocomplete="street-address" maxlength="300" required>
+                        </div>
+                        <div class="tf-grid-3">
+                            <div class="tf-field">
+                                <label for="w9-city">City</label>
+                                <input type="text" id="w9-city" class="form-control" data-field="city" autocomplete="address-level2" maxlength="120" required>
+                            </div>
+                            <div class="tf-field">
+                                <label for="w9-state">State</label>
+                                <input type="text" id="w9-state" class="form-control" data-field="state" autocomplete="address-level1" placeholder="e.g. PA" maxlength="40" required>
+                            </div>
+                            <div class="tf-field">
+                                <label for="w9-zip">ZIP code</label>
+                                <input type="text" id="w9-zip" class="form-control" data-field="zipCode" autocomplete="postal-code" maxlength="20" required>
+                            </div>
+                        </div>
+
+                        <div class="tf-field">
+                            <label>Taxpayer Identification Number (TIN)</label>
+                            <div class="tf-radios">
+                                <label class="tf-check"><input type="radio" name="w9-tin" value="ssn" checked> SSN (individual / sole proprietor)</label>
+                                <label class="tf-check"><input type="radio" name="w9-tin" value="ein"> EIN (business entity)</label>
+                            </div>
+                            <input type="text" id="w9-ssn" class="form-control" data-field="ssn" placeholder="XXX-XX-XXXX" inputmode="numeric" autocomplete="off" maxlength="11">
+                            <input type="text" id="w9-ein" class="form-control" data-field="ein" placeholder="XX-XXXXXXX" inputmode="numeric" autocomplete="off" maxlength="10" hidden>
+                        </div>
+
+                        <details class="tf-details">
+                            <summary>Advanced — for institutional payees only</summary>
+                            <p class="tf-help">These apply to government agencies, tax-exempt organizations, financial institutions, or corporate payees with internal account references. <strong>If you're an individual or small business, leave all three blank.</strong></p>
+                            <input type="text" class="form-control" data-field="exemptPayeeCode" placeholder="Exempt payee code (e.g. 1 = US govt, 2 = 501(a) org)" maxlength="10">
+                            <input type="text" class="form-control" data-field="fatcaCode" placeholder="FATCA reporting code (A through M; rarely applies)" maxlength="10">
+                            <input type="text" class="form-control" data-field="accountNumbers" placeholder="Account number(s) — optional" maxlength="100">
+                        </details>
+
+                        <div class="tf-sign">
+                            <label class="tf-check"><input type="checkbox" data-field="certify"> Under penalties of perjury, I certify that: (1) the number shown on this form is my correct taxpayer identification number; (2) I am not subject to backup withholding; (3) I am a U.S. citizen or other U.S. person; and (4) the FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct.</label>
+                            <div class="tf-grid-2">
+                                <div class="tf-field">
+                                    <label for="w9-sig">Signature (type your full name)</label>
+                                    <input type="text" id="w9-sig" class="form-control tf-signature" data-field="signature" maxlength="120" required>
+                                </div>
+                                <div class="tf-field">
+                                    <label for="w9-date">Date</label>
+                                    <input type="date" id="w9-date" class="form-control" data-field="date" required>
+                                </div>
+                            </div>
+                            <p class="tf-help">Typing your name and submitting is your electronic signature on this form.</p>
+                        </div>
+                    </div>
+                    <div class="tf-error" role="alert" hidden></div>
+                    <input type="text" name="website" class="tf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="tf-center"><button type="submit" class="btn btn-primary">Sign &amp; submit W-9</button></div>
+                </form>
+
+                <!-- ================= W-8BEN ================= -->
+                <form id="form-w8ben" class="tf-form" hidden novalidate>
+                    <div class="tf-form-head">
+                        <h2 class="tf-h2">Form W-8BEN</h2>
+                        <button type="button" class="tf-link" data-back>Change form type</button>
+                    </div>
+                    <p class="tf-help">Certificate of Foreign Status of Beneficial Owner (individuals).</p>
+
+                    <div class="tf-field">
+                        <label for="w8-name">Full legal name</label>
+                        <input type="text" id="w8-name" class="form-control" data-field="name" maxlength="300" required>
+                    </div>
+                    <div class="tf-field">
+                        <label for="w8-citizenship">Country of citizenship</label>
+                        <input type="text" id="w8-citizenship" class="form-control" data-field="citizenship" list="tf-countries" autocomplete="off" maxlength="120" required>
+                    </div>
+
+                    <fieldset class="tf-fieldset">
+                        <legend>Permanent residence address</legend>
+                        <input type="text" class="form-control" data-field="permanentAddress" placeholder="Street, apt / suite" maxlength="300" required>
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="permanentCity" placeholder="City or town" maxlength="120" required>
+                            <input type="text" class="form-control" data-field="permanentStateProvince" placeholder="State or province" maxlength="120">
+                        </div>
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="permanentPostalCode" placeholder="Postal code" maxlength="40">
+                            <input type="text" class="form-control" data-field="permanentCountry" data-country="perm" list="tf-countries" placeholder="Country" autocomplete="off" maxlength="120" required>
+                        </div>
+                        <div class="tf-alert tf-alert-warn" data-us-warning hidden>
+                            <strong>W-8BEN is for foreign persons.</strong> Your permanent residence can't be in the United States. If you're a US person, use W-9 instead.
+                            <div class="tf-btn-row"><button type="button" class="tf-btn-small" data-switch="w9">Switch to W-9</button></div>
+                        </div>
+                    </fieldset>
+
+                    <label class="tf-check"><input type="checkbox" data-mailing-toggle> I have a different mailing address</label>
+                    <fieldset class="tf-fieldset" data-mailing hidden>
+                        <legend>Mailing address</legend>
+                        <input type="text" class="form-control" data-field="mailingAddress" placeholder="Street, apt / suite" maxlength="300">
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="mailingCity" placeholder="City or town" maxlength="120">
+                            <input type="text" class="form-control" data-field="mailingStateProvince" placeholder="State or province" maxlength="120">
+                        </div>
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="mailingPostalCode" placeholder="Postal code" maxlength="40">
+                            <input type="text" class="form-control" data-field="mailingCountry" list="tf-countries" placeholder="Country" autocomplete="off" maxlength="120">
+                        </div>
+                    </fieldset>
+
+                    <div class="tf-grid-2">
+                        <div class="tf-field">
+                            <label>US TIN (SSN / ITIN, optional)</label>
+                            <input type="text" class="form-control" data-field="usTin" autocomplete="off" maxlength="11">
+                        </div>
+                        <div class="tf-field">
+                            <label>Foreign tax ID (FTIN)</label>
+                            <input type="text" class="form-control" data-field="foreignTin" autocomplete="off" maxlength="60">
+                        </div>
+                    </div>
+                    <div class="tf-grid-2">
+                        <div class="tf-field">
+                            <label>Reference number(s) (optional)</label>
+                            <input type="text" class="form-control" data-field="referenceNumbers" maxlength="100">
+                        </div>
+                        <div class="tf-field">
+                            <label>Date of birth</label>
+                            <input type="date" class="form-control" data-field="dateOfBirth" required>
+                        </div>
+                    </div>
+
+                    <fieldset class="tf-fieldset" data-treaty>
+                        <legend>Tax treaty claim (optional)</legend>
+                        <p class="tf-help">General guidance based on IRS Publication 901, not tax advice. Consult a tax professional if you're unsure.</p>
+                        <input type="text" class="form-control" data-field="treatyCountry" list="tf-countries" placeholder="Country for tax treaty claim" autocomplete="off" maxlength="120">
+                        <p class="tf-help" data-treaty-note hidden></p>
+                        <div class="tf-grid-3">
+                            <input type="text" class="form-control" data-field="articleParagraph" placeholder="Article + paragraph" maxlength="60">
+                            <input type="text" class="form-control" data-field="withholdingRate" placeholder="Withholding rate (%)" maxlength="10">
+                            <input type="text" class="form-control" data-field="incomeType" placeholder="Type of income" maxlength="60">
+                        </div>
+                        <textarea class="form-control tf-textarea" data-field="treatyExplanation" placeholder="Explanation for treaty claim (optional)" maxlength="600"></textarea>
+                    </fieldset>
+
+                    <div class="tf-sign">
+                        <label class="tf-check"><input type="checkbox" data-field="certify"> Under penalties of perjury, I certify that I am the beneficial owner (or am authorized to sign for the beneficial owner) of all the income to which this form relates, that I am not a U.S. person, that I am a resident of the treaty country listed above (if any), and that the information on this form is true, correct, and complete.</label>
+                        <div class="tf-grid-2">
+                            <div class="tf-field">
+                                <label>Signature (type your full name)</label>
+                                <input type="text" class="form-control tf-signature" data-field="signature" maxlength="120" required>
+                            </div>
+                            <div class="tf-field">
+                                <label>Date</label>
+                                <input type="date" class="form-control" data-field="date" required>
+                            </div>
+                        </div>
+                        <p class="tf-help">Typing your name and submitting is your electronic signature on this form.</p>
+                    </div>
+                    <div class="tf-error" role="alert" hidden></div>
+                    <input type="text" name="website" class="tf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="tf-center"><button type="submit" class="btn btn-primary">Sign &amp; submit W-8BEN</button></div>
+                </form>
+
+                <!-- ================= W-8BEN-E ================= -->
+                <form id="form-w8bene" class="tf-form" hidden novalidate>
+                    <div class="tf-form-head">
+                        <h2 class="tf-h2">Form W-8BEN-E</h2>
+                        <button type="button" class="tf-link" data-back>Change form type</button>
+                    </div>
+                    <p class="tf-help">Certificate of Status of Beneficial Owner for US Tax Withholding (entities).</p>
+
+                    <div class="tf-field">
+                        <label>Name of organization</label>
+                        <input type="text" class="form-control" data-field="entityName" maxlength="300" required>
+                    </div>
+                    <div class="tf-field">
+                        <label>Country of incorporation</label>
+                        <input type="text" class="form-control" data-field="countryOfIncorporation" data-country="inc" list="tf-countries" autocomplete="off" maxlength="120" required>
+                    </div>
+                    <div class="tf-field">
+                        <label for="w8e-entity">Entity type (Chapter 3)</label>
+                        <select id="w8e-entity" class="form-control" data-field="entityType">
+                            <option value="">Select entity type…</option>
+                            <option value="corporation">Corporation</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="simple_trust">Simple trust</option>
+                            <option value="grantor_trust">Grantor trust</option>
+                            <option value="complex_trust">Complex trust</option>
+                            <option value="estate">Estate</option>
+                            <option value="government">Government</option>
+                            <option value="central_bank">Central bank of issue</option>
+                            <option value="tax_exempt_org">Tax-exempt organization</option>
+                            <option value="private_foundation">Private foundation</option>
+                            <option value="international_org">International organization</option>
+                        </select>
+                    </div>
+                    <p class="tf-small">FATCA status: <strong data-fatca-label>—</strong> <button type="button" class="tf-link" data-open-advanced>auto-detected — change in Advanced</button></p>
+                    <div class="tf-alert tf-alert-warn" data-ffi-warning hidden>
+                        Financial institutions (FFIs) need the full paper W-8BEN-E; this online form won't satisfy reporting requirements. Please fill out the IRS form and <button type="button" class="tf-link" data-pick="upload">upload the signed PDF</button>.
+                    </div>
+
+                    <fieldset class="tf-fieldset">
+                        <legend>Permanent residence address</legend>
+                        <input type="text" class="form-control" data-field="permanentAddress" placeholder="Street, apt / suite" maxlength="300" required>
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="permanentCity" placeholder="City or town" maxlength="120" required>
+                            <input type="text" class="form-control" data-field="permanentStateProvince" placeholder="State or province" maxlength="120">
+                        </div>
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="permanentPostalCode" placeholder="Postal code" maxlength="40">
+                            <input type="text" class="form-control" data-field="permanentCountry" data-country="perm" list="tf-countries" placeholder="Country" autocomplete="off" maxlength="120" required>
+                        </div>
+                        <div class="tf-alert tf-alert-warn" data-us-warning hidden>
+                            <strong>W-8BEN-E is for foreign entities.</strong> Your permanent residence can't be in the United States. If the entity is a US person, use W-9 instead.
+                            <div class="tf-btn-row"><button type="button" class="tf-btn-small" data-switch="w9">Switch to W-9</button></div>
+                        </div>
+                    </fieldset>
+
+                    <label class="tf-check"><input type="checkbox" data-mailing-toggle> I have a different mailing address</label>
+                    <fieldset class="tf-fieldset" data-mailing hidden>
+                        <legend>Mailing address</legend>
+                        <input type="text" class="form-control" data-field="mailingAddress" placeholder="Street, apt / suite" maxlength="300">
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="mailingCity" placeholder="City or town" maxlength="120">
+                            <input type="text" class="form-control" data-field="mailingStateProvince" placeholder="State or province" maxlength="120">
+                        </div>
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="mailingPostalCode" placeholder="Postal code" maxlength="40">
+                            <input type="text" class="form-control" data-field="mailingCountry" list="tf-countries" placeholder="Country" autocomplete="off" maxlength="120">
+                        </div>
+                    </fieldset>
+
+                    <div class="tf-field">
+                        <label>Foreign TIN (your home-country tax ID)</label>
+                        <input type="text" class="form-control" data-field="foreignTin" autocomplete="off" maxlength="60">
+                    </div>
+
+                    <details class="tf-details" data-advanced>
+                        <summary>Advanced — rarely applies</summary>
+                        <p class="tf-help">For sophisticated entity structures only. <strong>Most foreign organizations leave these blank.</strong></p>
+                        <div class="tf-field">
+                            <label>FATCA status (Chapter 4)</label>
+                            <div class="tf-radios tf-radios-col">
+                                <label class="tf-check"><input type="radio" name="w8e-ch4" value="active_nffe"> <span><strong>Active NFFE</strong> — we run an active business or program. (Most payees pick this.)</span></label>
+                                <label class="tf-check"><input type="radio" name="w8e-ch4" value="passive_nffe"> <span><strong>Passive NFFE</strong> — we mainly hold investments or assets; no active operations.</span></label>
+                                <label class="tf-check"><input type="radio" name="w8e-ch4" value="ffi"> <span><strong>FFI</strong> — bank, broker, custodian, or other financial institution. Paper form required.</span></label>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" data-field="disregardedEntityName" placeholder="Name of disregarded entity receiving the payment (rarely applies)" maxlength="300">
+                        <div class="tf-grid-2">
+                            <input type="text" class="form-control" data-field="usTin" placeholder="US EIN (optional)" autocomplete="off" maxlength="10">
+                            <input type="text" class="form-control" data-field="giin" placeholder="GIIN (FFIs only)" autocomplete="off" maxlength="30">
+                        </div>
+                        <input type="text" class="form-control" data-field="referenceNumbers" placeholder="Reference number(s) (optional)" maxlength="100">
+                    </details>
+
+                    <fieldset class="tf-fieldset" data-treaty>
+                        <legend>Part III — Claim of tax treaty benefits (optional)</legend>
+                        <p class="tf-help">General guidance based on IRS Publication 901, not tax advice. Consult a tax professional if you're unsure.</p>
+                        <input type="text" class="form-control" data-field="treatyCountry" list="tf-countries" placeholder="Country for tax treaty claim" autocomplete="off" maxlength="120">
+                        <p class="tf-help" data-treaty-note hidden></p>
+                        <div class="tf-grid-3">
+                            <input type="text" class="form-control" data-field="articleParagraph" placeholder="Article + paragraph" maxlength="60">
+                            <input type="text" class="form-control" data-field="withholdingRate" placeholder="Withholding rate (%)" maxlength="10">
+                            <input type="text" class="form-control" data-field="incomeType" placeholder="Type of income" maxlength="60">
+                        </div>
+                        <textarea class="form-control tf-textarea" data-field="treatyExplanation" placeholder="Explanation for treaty claim (optional)" maxlength="600"></textarea>
+                    </fieldset>
+
+                    <div class="tf-sign">
+                        <label class="tf-check"><input type="checkbox" data-field="certify"> I declare under penalties of perjury that the entity above is the beneficial owner of all the income to which this form relates, is not a U.S. person, that the information on this form is true, correct, and complete, and that I am authorized to sign for it.</label>
+                        <div class="tf-grid-3">
+                            <div class="tf-field">
+                                <label>Signature (type your full name)</label>
+                                <input type="text" class="form-control tf-signature" data-field="signature" maxlength="120" required>
+                            </div>
+                            <div class="tf-field">
+                                <label>Capacity</label>
+                                <input type="text" class="form-control" data-field="signerCapacity" placeholder="e.g. Director" maxlength="60">
+                            </div>
+                            <div class="tf-field">
+                                <label>Date</label>
+                                <input type="date" class="form-control" data-field="date" required>
+                            </div>
+                        </div>
+                        <p class="tf-help">Typing your name and submitting is your electronic signature on this form.</p>
+                    </div>
+                    <div class="tf-error" role="alert" hidden></div>
+                    <input type="text" name="website" class="tf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="tf-center"><button type="submit" class="btn btn-primary">Sign &amp; submit W-8BEN-E</button></div>
+                </form>
+
+                <!-- ================= Upload ================= -->
+                <form id="form-upload" class="tf-form" hidden novalidate>
+                    <div class="tf-form-head">
+                        <h2 class="tf-h2">Upload a signed form</h2>
+                        <button type="button" class="tf-link" data-back>Back</button>
+                    </div>
+                    <p class="tf-help">
+                        Blank forms from the IRS:
+                        <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" target="_blank" rel="noopener">W-9</a> ·
+                        <a href="https://www.irs.gov/pub/irs-pdf/fw8ben.pdf" target="_blank" rel="noopener">W-8BEN</a> ·
+                        <a href="https://www.irs.gov/pub/irs-pdf/fw8bene.pdf" target="_blank" rel="noopener">W-8BEN-E</a>
+                    </p>
+                    <div class="tf-field">
+                        <label for="upload-type">Form type</label>
+                        <select id="upload-type" class="form-control">
+                            <option value="">Select form…</option>
+                            <option value="w9">W-9 (US person)</option>
+                            <option value="w8ben">W-8BEN (non-US individual)</option>
+                            <option value="w8bene">W-8BEN-E (non-US entity)</option>
+                        </select>
+                    </div>
+                    <div class="tf-field">
+                        <label for="upload-file">Signed PDF (max 10 MB)</label>
+                        <input type="file" id="upload-file" class="form-control" accept="application/pdf,.pdf">
+                    </div>
+                    <div class="tf-progress" hidden><div class="tf-progress-bar"></div></div>
+                    <div class="tf-error" role="alert" hidden></div>
+                    <input type="text" name="website" class="tf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="tf-center"><button type="submit" class="btn btn-primary">Upload</button></div>
+                </form>
+
+                <!-- ================= Success ================= -->
+                <section id="step-done" class="tf-done" hidden>
+                    <h2 class="tf-h2">Thank you!</h2>
+                    <p>Your <strong data-done-form></strong> was received. Reference: <code data-done-ref></code></p>
+                    <p class="tf-help">We'll be in touch if anything else is needed.</p>
+                    <button type="button" class="btn btn-primary" data-restart>Submit another form</button>
+                </section>
+
+                <datalist id="tf-countries"></datalist>
+            </div>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="tax-form.js"></script>
+</body>
+</html>
