@@ -6,7 +6,7 @@
     'use strict';
 
     var FORM_LABEL = { w9: 'W-9', w8ben: 'W-8BEN', w8bene: 'W-8BEN-E' };
-    var MAX_UPLOAD = 10 * 1024 * 1024;
+    var MAX_UPLOAD = 4 * 1024 * 1024;
     var US_COUNTRY_NAMES = [
         'united states', 'united states of america', 'usa', 'us', 'puerto rico', 'guam',
         'u.s. virgin islands', 'us virgin islands', 'american samoa', 'northern mariana islands'
@@ -348,11 +348,10 @@
         });
     });
 
-    // ---------------- upload a signed PDF (chunked) ----------------
+    // ---------------- upload a signed PDF (single request, 4 MB cap) ----------------
 
     (function initUpload() {
         var form = panels.upload;
-        var bar = $('.tf-progress', form), fill = $('.tf-progress-bar', form);
         form.addEventListener('submit', async function (ev) {
             ev.preventDefault();
             showError(form, '');
@@ -362,52 +361,34 @@
             if (!type) return showError(form, 'Please pick the form type.');
             if (!file) return showError(form, 'Please choose a PDF file.');
             if (!/\.pdf$/i.test(file.name)) return showError(form, 'Please upload a PDF file.');
-            if (file.size > MAX_UPLOAD) return showError(form, 'The PDF is larger than 10 MB.');
+            if (file.size > MAX_UPLOAD) return showError(form, 'The PDF is larger than 4 MB. Please email it to info@stuff.company instead.');
             if (!file.size) return showError(form, 'The file is empty.');
             var btn = $('button[type="submit"]', form);
             btn.disabled = true;
-            bar.hidden = false;
-            fill.style.width = '2%';
+            btn.textContent = 'Uploading…';
             try {
-                var chunk = 3 * 1024 * 1024;
-                var parts = Math.ceil(file.size / chunk);
-                var init = await postJson({
-                    mode: 'upload-init',
-                    formType: type,
-                    contactName: $('#contactName').value.trim(),
-                    contactEmail: $('#contactEmail').value.trim(),
-                    fileName: file.name,
-                    size: file.size,
-                    parts: parts,
-                    website: form.elements.website.value
+                var res = await fetch('/api/tax-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/pdf',
+                        'X-Form-Type': type,
+                        'X-Contact-Name': encodeURIComponent($('#contactName').value.trim()),
+                        'X-Contact-Email': encodeURIComponent($('#contactEmail').value.trim()),
+                        'X-File-Name': encodeURIComponent(file.name),
+                        'X-Website': encodeURIComponent(form.elements.website.value)
+                    },
+                    body: file
                 });
-                if (!init.token) { done(init); return; } // honeypot path
-                chunk = init.chunkBytes || chunk;
-                for (var i = 0; i < parts; i++) {
-                    var body = file.slice(i * chunk, Math.min(file.size, (i + 1) * chunk));
-                    var ok = false, lastErr = null;
-                    for (var attempt = 0; attempt < 3 && !ok; attempt++) {
-                        var res = await fetch('/api/tax-form-chunk?i=' + i, {
-                            method: 'PUT',
-                            headers: { 'Content-Type': 'application/octet-stream', 'X-Upload-Token': init.token },
-                            body: body
-                        });
-                        if (res.ok) ok = true;
-                        else { try { lastErr = (await res.json()).error; } catch (e) {} }
-                    }
-                    if (!ok) throw new Error(lastErr || 'Upload failed. Please try again.');
-                    fill.style.width = Math.round(((i + 1) / (parts + 1)) * 100) + '%';
-                }
-                var out = await postJson({ mode: 'upload-complete', token: init.token });
-                fill.style.width = '100%';
+                var out = {};
+                try { out = await res.json(); } catch (e) {}
+                if (!res.ok) throw new Error(out.error || 'Upload failed (' + res.status + '). Please try again.');
                 resetForm(form);
                 done(out);
             } catch (err) {
                 showError(form, err.message);
             } finally {
                 btn.disabled = false;
-                bar.hidden = true;
-                fill.style.width = '0';
+                btn.textContent = 'Upload';
             }
         });
     })();

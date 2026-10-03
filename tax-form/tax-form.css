@@ -1,4 +1,4 @@
-/* Tax form + admin pages. Builds on css/style.css (Kale theme). */
+/* Tax form page. Builds on css/style.css (Kale theme). */
 .tf { max-width: 760px; }
 .tf [hidden] { display: none !important; }
 .tf-lead { text-align: center; font-size: 1.05rem; color: #555; }
@@ -89,20 +89,8 @@
 .tf-signature { font-family: 'Caveat', cursive; font-size: 1.5rem !important; padding: 6px 20px !important; }
 .tf-error { background: #fdecec; border: 1px dashed #d77; color: #8a1f1f; border-radius: 16px; padding: 12px 16px; margin: 10px 0; }
 .tf-hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; opacity: 0; }
-.tf-progress { height: 8px; border-radius: 4px; background: #eee; overflow: hidden; margin: 10px 0; }
-.tf-progress-bar { height: 100%; width: 0; background: #000; transition: width 0.2s ease; }
 .tf-done { text-align: center; padding: 20px 0 40px; }
 .tf button[disabled] { opacity: 0.6; cursor: wait; }
-
-/* admin */
-.tf-admin { max-width: 1100px; }
-.tf-table-wrap { overflow-x: auto; }
-.tf-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-.tf-table th, .tf-table td { padding: 8px 10px; border-bottom: 1px dashed #ddd; text-align: left; vertical-align: top; }
-.tf-table th { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; text-transform: uppercase; color: #555; }
-.tf-table td.tf-actions { white-space: nowrap; }
-.tf-pill { display: inline-block; padding: 1px 10px; border-radius: 10px; background: #eee; font-size: 0.8rem; }
-.tf-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
 
 @media (max-width: 600px) {
     .tf-grid-2, .tf-grid-3 { grid-template-columns: 1fr; }
